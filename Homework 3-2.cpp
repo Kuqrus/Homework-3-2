@@ -4,6 +4,14 @@ class counter
 {
 public:
 
+	counter() {
+		num = 1;
+	}
+
+	counter(int num_) {
+		num = num_;
+	}
+
 	void setUserValue(int num_) {
 		num = num_;
 	}
@@ -19,11 +27,33 @@ private:
 	int num;
 };
 
+void counterAction(counter value) {
+	char userAction = ' ';
+	while (userAction != 'x')
+	{
+		std::cout << "Choose action (+, -, =, x): ";
+		std::cin >> userAction;
+
+		switch (userAction)
+		{
+		case('+'):
+			value.add();
+			break;
+		case('-'):
+			value.sub();
+			break;
+		case('='):
+			value.print();
+			break;
+		default:
+			break;
+		}
+
+	}
+}
 
 int main()
 {
-	counter test;
-
 	char isUserValue = ' ';
 	
 	std::cout << "Do you want to input start value (y/n)? ";
@@ -33,36 +63,13 @@ int main()
 		int userValue = 0;
 		std::cout << "Enter start value: ";
 		std::cin >> userValue;
-		test.setUserValue(userValue);
+		counter test(userValue);
+		counterAction(test);
 	}
 	else if (isUserValue == 'n') {
-		test.setDefaultValue();
-	}	
-
-
-	char userAction= ' ';
-	while(userAction != 'x')
-	{
-		std::cout << "Choose action (+, -, =, x): ";
-		std::cin >> userAction;
-
-		switch (userAction)
-		{
-		case('+'):
-			test.add();
-			break;
-		case('-'):
-			test.sub();
-			break;
-		case('='):
-			test.print();
-			break;
-		default:
-			break;
-		}
-
+		counter test;
+		counterAction(test);
 	}
-	
 
 }
 
